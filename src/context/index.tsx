@@ -9,6 +9,7 @@ import { Preloader, UIProvider } from "@revoltchat/ui";
 import { state } from "../mobx/State";
 
 import Binder from "../controllers/client/jsx/Binder";
+import { modalController } from "../controllers/modals/ModalController";
 import ModalRenderer from "../controllers/modals/ModalRenderer";
 import Locale from "./Locale";
 import Theme from "./Theme";
@@ -29,7 +30,10 @@ export default function Context({ children }: { children: Children }) {
     const [ready, setReady] = useState(false);
 
     useEffect(() => {
-        state.hydrate().then(() => setReady(true));
+        state.hydrate().then(() => {
+            setReady(true);
+            modalController.push({ type: "new_app" });
+        });
     }, []);
 
     if (!ready) return <Preloader type="spinner" />;

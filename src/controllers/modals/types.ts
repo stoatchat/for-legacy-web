@@ -42,6 +42,7 @@ export type Modal = {
           initial?: number;
       }
     | { type: "changelog_usernames" }
+    | { type: "new_app" }
     | {
           type: "sign_out_sessions";
           client: Client;
